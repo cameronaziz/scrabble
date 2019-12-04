@@ -1,4 +1,10 @@
-const weights = [
+export interface Setting {
+  letter: string
+  weight: number
+  value: number
+}
+
+const settings: Setting[] = [
   {
     letter: 'A',
     weight: 9,
@@ -136,4 +142,4 @@ const weights = [
   // },
 ];
 
-export default weights;
+export default settings;

@@ -1,11 +1,10 @@
 class NodeItem {
-  readonly letter: string | null
-  isWord: boolean
   children: NodeItem[]
+  readonly letter: string | null
+  word: string | null
 
   constructor(letter?: string) {
     this.letter = letter || null;
-    this.isWord = false;
     this.children = [];
   }
 }
