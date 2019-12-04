@@ -23,9 +23,8 @@ class Trie {
     for (let i = 0; i < word.length; i += 1) {
       const letter = word[i];
       const child = this.getChild(current, letter);
-      let newNode: NodeItem;
       if (!child) {
-        newNode = new NodeItem(letter);
+        const newNode = new NodeItem(letter);
         current.children.push(newNode);
         current = newNode;
       } else {

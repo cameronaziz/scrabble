@@ -1,5 +1,5 @@
 class NodeItem {
-  letter: string | null
+  readonly letter: string | null
   isWord: boolean
   children: NodeItem[]
 
