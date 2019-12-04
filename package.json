@@ -1,0 +1,17 @@
+{
+  "name": "scrabble",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cameron Aziz",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node ./index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.12.14",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  }
+}
