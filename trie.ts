@@ -7,13 +7,13 @@ interface Result {
 }
 
 class Trie {
-  root: NodeItem
+  root: NodeItem;
 
   constructor() {
     this.root = new NodeItem();
   }
 
-  getChild(nodeItem: NodeItem, letter: string) {
+  getChild(nodeItem: NodeItem, letter: string): NodeItem {
     return nodeItem.children.find((node) => node.letter === letter);
   }
 
@@ -21,18 +21,18 @@ class Trie {
     const word = unformattedWord.toLowerCase();
     let current = this.root;
     for (let i = 0; i < word.length; i += 1) {
-      const letter = word[i]
-      const child = this.getChild(current, letter)
-      let newNode: NodeItem
+      const letter = word[i];
+      const child = this.getChild(current, letter);
+      let newNode: NodeItem;
       if (!child) {
-        newNode = new NodeItem(letter)
+        newNode = new NodeItem(letter);
         current.children.push(newNode);
         current = newNode;
       } else {
         current = child;
       }
       if (i === word.length - 1) {
-        current.isWord = true
+        current.isWord = true;
       }
     }
   }
@@ -40,18 +40,19 @@ class Trie {
   prepareResult(word: string): Result {
     let points = 0;
     let i = word.length;
-    while (i--) {
+    while (i >= 0) {
       const letter = word.charAt(i);
-      const stats = weights.find((weight) => weight.letter.toLowerCase() === letter)
+      const stats = weights.find((weight) => weight.letter.toLowerCase() === letter);
       points += stats ? stats.value : 0;
+      i -= 1;
     }
     return {
       word,
       points,
-    }
+    };
   }
 
-  validWords(letters: string, node: NodeItem = this.root, word: string = '', results: Result[] = []) {
+  validWords(letters: string, node: NodeItem = this.root, word: string = '', results: Result[] = []): Result[] {
     if (node.isWord && word.length > 1) {
       results.push(this.prepareResult(word));
     }
@@ -59,15 +60,14 @@ class Trie {
     for (let char of letters) {
       if (!seen.has(char)) {
         seen.add(char);
-        const child = this.getChild(node, char)
+        const child = this.getChild(node, char);
         if (child) {
-          this.validWords(letters.replace(char, ''), child, `${word}${char}`, results);
+          const remainingLetters = letters.replace(char, '');
+          this.validWords(remainingLetters, child, `${word}${char}`, results);
         }
       }
     }
-    results.sort((a: Result, b: Result) => {
-      return b.points - a.points
-    })
+    results.sort((a: Result, b: Result) => b.points - a.points);
     return results;
   }
 }
